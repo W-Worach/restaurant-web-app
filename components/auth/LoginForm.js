@@ -1,34 +1,39 @@
 import React, { useState } from 'react';
 
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Email:', email);
-    console.log('Password:', password);
-    setEmail('');
-    setPassword('');
+    try {
+      const response = await login(username, password);
+      console.log('Odpowiedź serwera:', response);
+
+      setusername('');
+      setPassword('');
+    } catch (error) {
+      console.error('Błąd podczas logowania', error);
+    }
   };
 
   return (
     <div className="max-w-md mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <h2 className="text-2xl font-bold mb-4">Logowanie</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block mb-1">Email:</label>
+          <label htmlFor="username" className="block mb-1">Nazwa użytkownika:</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="username"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
             required
           />
         </div>
         <div>
-          <label htmlFor="password" className="block mb-1">Password:</label>
+          <label htmlFor="password" className="block mb-1">Hasło:</label>
           <input
             type="password"
             id="password"
