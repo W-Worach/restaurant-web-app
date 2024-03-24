@@ -1,5 +1,5 @@
 const config = {
-    apiUrl: 'https://restaurantapi20240224142603.azurewebsites.net'
+    apiUrl: 'http://localhost:4000'
 };
 
 export default config;
