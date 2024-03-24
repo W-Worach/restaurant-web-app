@@ -2,7 +2,7 @@ import config from "./_config";
 
 const login = async (username, password) => {
     try {
-      const url = config.apiUrl + '/api/auth/login';
+      const url = config.apiUrl + '/login-user';
   
       const response = await fetch(url, {
         method: 'POST',
@@ -21,9 +21,9 @@ const login = async (username, password) => {
     }
   };
   
-const register = async (email, password) => {
+const register = async (username, email, password) => {
     try {
-      const url = config.apiUrl + '/api/auth/register';
+      const url = config.apiUrl + '/register-user';
   
       const response = await fetch(url, {
         method: 'POST',
