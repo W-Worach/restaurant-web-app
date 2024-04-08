@@ -26,6 +26,7 @@ const LoginForm = () => {
     try {
       const response = await login(username, password);
       localStorage.setItem('token', response.token);
+      console.log('Logowanie pomyślne:', response);
       router.push('/');
     } catch (error) {
       console.error('Błąd podczas logowania:', error);

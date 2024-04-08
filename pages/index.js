@@ -7,9 +7,6 @@ export default function Home() {
       <section className="welcome-section text-center py-20 bg-gray-100">
         <h1 className="text-4xl font-bold text-gray-800">Witaj w naszej restauracji!</h1>
         <p className="text-xl mt-4 text-gray-600">Odkryj smaki, które zapamiętasz na zawsze.</p>
-        <Link href="/menu" className="mt-8 inline-block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600">
-          Odkryj nasze menu
-        </Link>
       </section>
 
       {/* Sekcja menu */}
@@ -42,7 +39,7 @@ export default function Home() {
       {/* Sekcja kontaktowa */}
       <section className="contact-section text-center py-20 bg-gray-100">
         <h2 className="text-3xl font-bold text-gray-800">Kontakt</h2>
-        <p className="text-xl mt-4 text-gray-600">Masz pytania? Chcesz zarezerwować stolik? Skontaktuj się z nami!</p>
+        <p className="text-xl mt-4 text-gray-600">Masz pytania? Skontaktuj się z nami!</p>
         <Link href="/contact" className="mt-8 inline-block bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600">
           Skontaktuj się
         </Link>

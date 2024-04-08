@@ -42,8 +42,9 @@ const RegisterForm = () => {
     setLoading(true);
     try {
       const response = await register(username, email, password);
+      localStorage.setItem('token', response.token);
       console.log('Rejestracja pomyślna:', response);
-      router.push('/login');
+      router.push('/');
     } catch (error) {
       console.error('Błąd podczas rejestracji:', error);
       setError('Rejestracja nieudana. Spróbuj ponownie.');
