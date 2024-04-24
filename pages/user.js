@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 const UserInfo = () => {
   // Przykładowe dane użytkownika
   const userData = {
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@example.com",
     age: 30,
-    city: 'New York',
-    country: 'USA'
+    city: "New York",
+    country: "USA",
   };
 
   return (
@@ -20,7 +20,9 @@ const UserInfo = () => {
           <p>{userData.firstName}</p>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Nazwisko:</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Nazwisko:
+          </label>
           <p>{userData.lastName}</p>
         </div>
         <div className="mb-4">

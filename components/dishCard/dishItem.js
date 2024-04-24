@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
 const DishItem = ({ item, addToCart }) => {
   return (
@@ -7,15 +7,19 @@ const DishItem = ({ item, addToCart }) => {
       <Image
         src="/placeholder200x200.png"
         alt={item.name}
-        width={200} 
+        width={200}
         height={200}
         className="rounded-t-lg"
       />
       <div className="font-bold text-lg text-blue-600 mt-4">{item.name}</div>
       <div className="text-gray-600 mt-1">{item.description}</div>
-      <div className="text-lg font-bold mt-3 text-green-600">{item.price} zł</div>
+      <div className="text-lg font-bold mt-3 text-green-600">
+        {item.price} zł
+      </div>
       {!item.availability && (
-        <div className="text-red-500 mt-2 font-medium">Currently Unavailable</div>
+        <div className="text-red-500 mt-2 font-medium">
+          Currently Unavailable
+        </div>
       )}
       {item.availability && (
         <button

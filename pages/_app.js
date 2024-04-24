@@ -1,6 +1,6 @@
-import '../styles/globalsStyles.css';
-import RootLayout from '../components/layout/RootLayout';
-import { AuthProvider } from '../context/AuthContext';
+import "../styles/globalsStyles.css";
+import RootLayout from "../components/layout/RootLayout";
+import { AuthProvider } from "../context/AuthContext";
 
 function MyApp({ Component, pageProps }) {
   return (

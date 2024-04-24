@@ -1,5 +1,5 @@
-import React from 'react';
-import DishItem from './DishItem';
+import React from "react";
+import DishItem from "./DishItem";
 
 const DishList = ({ items, addToCart }) => {
   return (
