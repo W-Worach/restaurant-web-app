@@ -11,9 +11,7 @@ const login = async (username, password) => {
     });
 
     if (!response.ok) {
-      throw new Error(
-        "Problem z logowaniem. Sprawdź swoje dane i spróbuj ponownie."
-      );
+      throw new Error(response.status);
     }
 
     return await response.json();
@@ -34,9 +32,7 @@ const register = async (username, email, password) => {
     });
 
     if (!response.ok) {
-      throw new Error(
-        "Problem z rejestracją. Sprawdź swoje dane i spróbuj ponownie."
-      );
+      throw new Error(response.status);
     }
 
     return await response.json();

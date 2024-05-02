@@ -21,12 +21,16 @@ const RegisterForm = () => {
       return false;
     }
     if (password.length < 8) {
-      setError('Hasło musi mieć co najmniej 8 znaków.');
+      setError("Hasło musi mieć co najmniej 8 znaków.");
       return false;
     }
-    const strongPassword = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
+    const strongPassword = new RegExp(
+      "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})"
+    );
     if (!strongPassword.test(password)) {
-      setError('Hasło musi zawierać małe i duże litery, cyfry oraz znaki specjalne.');
+      setError(
+        "Hasło musi zawierać małe i duże litery, cyfry oraz znaki specjalne."
+      );
       return false;
     }
     return true;

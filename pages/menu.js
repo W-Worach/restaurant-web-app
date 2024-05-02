@@ -1,70 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { getMenuItems } from "../services/DishService";
-import DishList from "../components/dishCard/DishList";
-import Cart from "../components/cart/Cart";
+import React, { useState, useEffect, useContext } from "react";
+import { getMenuItems } from "@/services/DishService";
+import { getTables } from "@/services/TablesService";
+import DishList from "@/components/dishCard/DishList";
+import Cart from "@/components/cart/Cart";
+import CartManager from "@/components/cart/CartManager";
+import { AuthContext } from "@/context/AuthContext";
+import TableSelector from "@/components/tables/TableSelector";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
+  const [tables, setTables] = useState([]);
+  const [selectedTableId, setSelectedTableId] = useState(null);
+  const { isLoggedIn, userId, token } = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchMenuItems = async () => {
+    const fetchData = async () => {
       try {
-        const items = await getMenuItems();
-        setMenuItems(items);
+        const [menuItemsResponse, tablesResponse] = await Promise.all([
+          getMenuItems(),
+          getTables(),
+        ]);
+        setMenuItems(menuItemsResponse);
+        setTables(tablesResponse);
       } catch (error) {
-        console.error("Błąd podczas pobierania menu:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    fetchMenuItems();
-  }, []);
-
-  const addToCart = (item) => {
-    setCartItems((currentItems) => {
-      const itemIndex = currentItems.findIndex(
-        (cartItem) => cartItem.item.id === item.id
-      );
-      if (itemIndex > -1) {
-        const newItems = [...currentItems];
-        newItems[itemIndex].quantity += 1;
-        return newItems;
-      } else {
-        return [...currentItems, { item, quantity: 1 }];
-      }
-    });
-  };
-
-  const removeFromCart = (itemToRemove) => {
-    setCartItems((currentItems) =>
-      currentItems.filter((cartItem) => cartItem.item.id !== itemToRemove.id)
-    );
-  };
-
-  const updateQuantity = (item, quantity) => {
-    setCartItems((currentItems) => {
-      return currentItems.map((cartItem) => {
-        if (cartItem.item.id === item.id) {
-          return { ...cartItem, quantity: quantity >= 1 ? quantity : 1 };
-        }
-        return cartItem;
-      });
-    });
-  };
+    fetchData();
+  }, [userId, token]);
 
   return (
-    <div className="container mx-auto px-4 py-8 flex">
-      <div className="flex-1">
-        <DishList items={menuItems} addToCart={addToCart} />
-      </div>
-      <div className="w-1/3">
-        <Cart
-          items={cartItems}
-          removeFromCart={removeFromCart}
-          updateQuantity={updateQuantity}
-        />
-      </div>
-    </div>
+    <CartManager>
+      {({
+        cartItems,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        submitOrder,
+      }) => (
+        <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row">
+          <div className="flex-1 mb-8 md:mb-0 md:mr-8">
+            <DishList
+              items={menuItems}
+              addToCart={addToCart}
+              showAddToCart={isLoggedIn}
+            />
+          </div>
+          <div className="w-full md:w-1/3">
+            {isLoggedIn ? (
+              <>
+                <div className="m-2 mb-4 shadow-lg p-4 rounded-lg bg-white">
+                  <h2 className="text-lg font-semibold mb-2">Wybierz Stół</h2>
+                  <TableSelector
+                    tables={tables}
+                    selectedTableId={selectedTableId}
+                    onTableSelect={setSelectedTableId}
+                  />
+                </div>
+                <Cart
+                  items={cartItems}
+                  removeFromCart={removeFromCart}
+                  updateQuantity={updateQuantity}
+                  submitOrder={() => {
+                    if (!selectedTableId) {
+                      alert("Wybierz stolik przed zamówieniem!");
+                    } else {
+                      submitOrder(selectedTableId, userId, token);
+                    }
+                  }}
+                />
+              </>
+            ) : (
+              <div className="text-lg text-center font-semibold my-20">
+                Zaloguj się, żeby zamówić jedzenie.
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </CartManager>
   );
 };
 

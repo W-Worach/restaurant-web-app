@@ -1,6 +1,6 @@
 import React from "react";
 
-const Cart = ({ items, removeFromCart, updateQuantity }) => {
+const Cart = ({ items, removeFromCart, updateQuantity, submitOrder }) => {
   const getTotalSum = () => {
     return items.reduce(
       (sum, { item, quantity }) => sum + item.price * quantity,
@@ -9,7 +9,7 @@ const Cart = ({ items, removeFromCart, updateQuantity }) => {
   };
 
   return (
-    <div className="bg-white shadow-xl rounded-lg p-5 m-2">
+    <div className="bg-white shadow-xl rounded-lg p-4 m-2">
       <h2 className="text-xl font-bold mb-4">Koszyk</h2>
       {items.length > 0 ? (
         <ul>
@@ -25,7 +25,7 @@ const Cart = ({ items, removeFromCart, updateQuantity }) => {
                   onChange={(e) =>
                     updateQuantity(cartItem.item, parseInt(e.target.value))
                   }
-                  className="form-input mx-2 text-center w-16"
+                  className="form-input mx-2 text-center w-10"
                   min="1"
                 />
                 <span className="mr-2 font-bold">{cartItem.item.name}</span>
@@ -41,8 +41,17 @@ const Cart = ({ items, removeFromCart, updateQuantity }) => {
               </button>
             </li>
           ))}
-          <div className="text-lg font-bold mt-4">
-            Łączna suma: {getTotalSum()} zł
+          <div className="flex justify-between items-center mt-4">
+            <div className="text-lg font-bold">
+              Łączna suma: {getTotalSum()} zł
+            </div>
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={submitOrder}
+              disabled={items.length === 0}
+            >
+              Złóż zamówienie
+            </button>
           </div>
         </ul>
       ) : (

@@ -26,9 +26,9 @@ const LoginForm = () => {
     try {
       const response = await login(username, password);
       localStorage.setItem("token", response.token);
-      localStorage.setItem("userId", response.userId)
+      localStorage.setItem("userId", response.userId);
       console.log("Logowanie pomyślne:", response);
-      router.push("/");
+      window.location.href = "/";
     } catch (error) {
       console.error("Błąd podczas logowania:", error);
       setError("Nieudane logowanie. Sprawdź swoje dane i spróbuj ponownie.");

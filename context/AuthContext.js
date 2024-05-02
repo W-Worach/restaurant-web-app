@@ -6,13 +6,15 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [token, setToken] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
     const storedUserId = localStorage.getItem("userId");
-    setIsLoggedIn(!!token);
+    setIsLoggedIn(!!storedToken);
     setUserId(storedUserId);
+    setToken(storedToken);
   }, []);
 
   const logout = () => {
@@ -20,11 +22,12 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("userId");
     setIsLoggedIn(false);
     setUserId(null);
+    setToken(null);
     router.push("/");
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, userId, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, userId, token, logout }}>
       {children}
     </AuthContext.Provider>
   );
