@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { login } from "../../services/AuthService";
+import { login } from "@/services/AuthService";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const router = useRouter();
 
   const validateForm = () => {
     if (username.length === 0 || password.length === 0) {

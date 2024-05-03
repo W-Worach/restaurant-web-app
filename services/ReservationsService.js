@@ -4,7 +4,7 @@ const getAllReservations = async (token) => {
   const response = await fetch(config.apiUrl + "/GetReservations-MobileWeb", {
     method: "GET",
     headers: {
-      "Authorization": "Bearer ${token}",
+      "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });

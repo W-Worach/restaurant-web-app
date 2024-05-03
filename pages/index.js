@@ -55,7 +55,7 @@ export default function Home() {
           stolik? Skorzystaj z naszego systemu rezerwacji online.
         </p>
         <Link
-          href="/reservation"
+          href="/reservations"
           className="mt-8 inline-block bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
         >
           Zarezerwuj stolik

@@ -6,14 +6,14 @@ const ReservationsPage = () => {
   const [reservations, setReservations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { userId, token } = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchReservations = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const reservationData = await getAllReservations(userId, token);
+        const reservationData = await getAllReservations(token);
         setReservations(reservationData);
       } catch (err) {
         setError(err.message);
@@ -22,7 +22,7 @@ const ReservationsPage = () => {
     };
 
     fetchReservations();
-  }, [userId, token]);
+  }, [token]);
 
   return (
     <div className="container mx-auto px-4 py-8">

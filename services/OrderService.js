@@ -4,7 +4,7 @@ const getOrdersByUserId = async (userId, token) => {
   const response = await fetch(config.apiUrl + "/GetAllUserOrders/" + userId, {
     method: "GET",
     headers: {
-      "Authorization": "Bearer " + token,
+      "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json",
     },
   });
@@ -19,7 +19,7 @@ const createOrder = async (orderData, token) => {
   const response = await fetch(config.apiUrl + "/api/Order", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer ${token}",
+      "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(orderData),
@@ -37,7 +37,7 @@ const changeStatusToReadyToPay = async (orderId, token) => {
     {
       method: "PUT",
       headers: {
-        "Authorization": "Bearer ${token}",
+        "Authorization": `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     }
