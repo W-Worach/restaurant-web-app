@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function Home() {
+  const { isLoggedIn } = useContext(AuthContext);
+
   return (
     <div className="font-sans">
       {/* Sekcja powitalna */}
@@ -51,15 +55,32 @@ export default function Home() {
           Rezerwacja stolików
         </h2>
         <p className="text-xl mt-4 text-gray-600">
-          Planujesz specjalne spotkanie lub po prostu chcesz zarezerwować
-          stolik? Skorzystaj z naszego systemu rezerwacji online.
+          {isLoggedIn ? (
+            <>
+              Planujesz specjalne spotkanie lub po prostu chcesz zarezerwować
+              stolik? Skorzystaj z naszego systemu rezerwacji online.
+            </>
+          ) : (
+            <>
+              Funkcja rezerwacji jest dostępna tylko dla zarejestrowanych użytkowników.
+            </>
+          )}
         </p>
-        <Link
-          href="/reservations"
-          className="mt-8 inline-block bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
-        >
-          Zarezerwuj stolik
-        </Link>
+        {isLoggedIn ? (
+          <Link
+            href="/reservations"
+            className="mt-8 inline-block bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
+          >
+            Zarezerwuj stolik
+          </Link>
+        ) : (
+          <Link
+            href="/register"
+            className="mt-8 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+          >
+            Zarejestruj się
+          </Link>
+        )}
       </section>
 
       {/* Sekcja kontaktowa */}

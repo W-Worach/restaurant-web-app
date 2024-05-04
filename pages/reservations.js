@@ -1,65 +1,115 @@
-import React, { useState, useEffect, useContext } from "react";
-import { getAllReservations } from "@/services/ReservationsService";
+import React, { useState, useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
+import TableSelector from "@/components/reservations/TableSelector";
+import DatePicker from "@/components/reservations/DatePicker";
+import TimeRangePicker from "@/components/reservations/TimeRangePicker";
+import useReservationData from "hooks/useReservationData";
+import moment from "moment";
 
 const ReservationsPage = () => {
-  const [reservations, setReservations] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const { token } = useContext(AuthContext);
+  const { token, userId } = useContext(AuthContext);
+  const {
+    tables,
+    filteredReservations,
+    isLoading,
+    error,
+    addReservation,
+    filterReservations,
+  } = useReservationData(token);
+  const [selectedTableId, setSelectedTableId] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
+  const [timeRange, setTimeRange] = useState({ from: "", to: "" });
+  const [formError, setFormError] = useState("");
 
-  useEffect(() => {
-    const fetchReservations = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const reservationData = await getAllReservations(token);
-        setReservations(reservationData);
-      } catch (err) {
-        setError(err.message);
-      }
-      setIsLoading(false);
-    };
+  const handleTableChange = (e) => {
+    setSelectedTableId(e.target.value);
+    filterReservations(e.target.value, selectedDate);
+  };
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value);
+    filterReservations(selectedTableId, e.target.value);
+  };
+  const handleTimeChange = (field, value) =>
+    setTimeRange((prev) => ({ ...prev, [field]: value }));
 
-    fetchReservations();
-  }, [token]);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedTableId || !selectedDate || !timeRange.from || !timeRange.to) {
+      setFormError("Please fill in all fields.");
+      return;
+    }
+
+    const selectedFromDate = moment(`${selectedDate}T${timeRange.from}`).format(
+      "YYYY-MM-DDTHH:mm:ss"
+    );
+    const selectedToDate = moment(`${selectedDate}T${timeRange.to}`).format(
+      "YYYY-MM-DDTHH:mm:ss"
+    );
+
+    try {
+      const message = await addReservation({
+        from: selectedFromDate,
+        to: selectedToDate,
+        identityUserId: userId,
+        tableModelId: selectedTableId,
+      });
+      setFormError(`Reservation successful: ${message}`);
+    } catch (err) {
+      setFormError(err.message);
+    }
+  };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Current Reservations</h1>
-      {isLoading ? (
-        <p>Loading reservations...</p>
-      ) : error ? (
-        <p className="text-red-500">Error: {error}</p>
-      ) : (
-        <ul>
-          {reservations.length > 0 ? (
-            reservations.map((reservation) => (
-              <li
-                key={reservation.id}
-                className="mb-4 p-2 border rounded shadow-sm"
-              >
-                <p>
-                  <strong>Reservation ID:</strong> {reservation.id}
-                </p>
-                <p>
-                  <strong>From:</strong>{" "}
-                  {new Date(reservation.from).toLocaleString()}
-                </p>
-                <p>
-                  <strong>To:</strong>{" "}
-                  {new Date(reservation.to).toLocaleString()}
-                </p>
-                <p>
-                  <strong>Table ID:</strong> {reservation.tableModelId}
-                </p>
-              </li>
-            ))
-          ) : (
-            <p>No current reservations found.</p>
-          )}
-        </ul>
-      )}
+    <div className="container mx-auto px-4 py-8 w-3/4">
+      <h1 className="text-2xl font-bold mb-4 text-center">
+        Create a Reservation
+      </h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <TableSelector
+          tables={tables}
+          selectedTableId={selectedTableId}
+          onTableChange={handleTableChange}
+        />
+        <DatePicker
+          selectedDate={selectedDate}
+          onDateChange={handleDateChange}
+        />
+        <TimeRangePicker
+          timeRange={timeRange}
+          onTimeChange={handleTimeChange}
+        />
+        <button
+          type="submit"
+          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Submit Reservation
+        </button>
+        {filteredReservations.length > 0 && (
+          <div className="mt-4 bg-white shadow overflow-hidden rounded-lg">
+            <h3 className="text-lg font-bold text-center p-4 border-b">
+              Current Reservations for Table {selectedTableId} on {selectedDate}
+              :
+            </h3>
+            <ul>
+              {filteredReservations.map((reservation) => (
+                <li
+                  key={reservation.id}
+                  className="px-6 py-2 border-b last:border-b-0"
+                >
+                  <p className="text-gray-900 text-center">
+                    {moment(reservation.from).format("HH:mm")} -{" "}
+                    {moment(reservation.to).format("HH:mm")}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {formError && <p className="text-red-500 text-center">{formError}</p>}
+      </form>
     </div>
   );
 };

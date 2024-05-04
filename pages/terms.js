@@ -3,7 +3,7 @@ import Head from "next/head";
 
 const TermsPage = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container w-3/4 px-4 py-8">
       <Head>
         <title>Regulamin</title>
       </Head>

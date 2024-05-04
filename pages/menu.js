@@ -3,9 +3,9 @@ import { getMenuItems } from "@/services/DishService";
 import { getTables } from "@/services/TablesService";
 import DishList from "@/components/dishCard/DishList";
 import Cart from "@/components/cart/Cart";
-import CartManager from "@/components/cart/CartManager";
+import CartManager from "hooks/useCartManager";
 import { AuthContext } from "@/context/AuthContext";
-import TableSelector from "@/components/tables/TableSelector";
+import TableSelector from "@/components/tables/TableSelectorWithAvailability";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
