@@ -19,7 +19,7 @@ export default function Home() {
 
       {/* Menu section */}
       <section className="menu-section text-center py-20">
-        <h2 className="text-3xl font-bold text-gray-800">Poznaj nasze menu</h2>
+        <h2 className="text-3xl font-bold text-gray-800">Explore our menu</h2>
         <p className="text-xl mt-4 text-gray-600">
           Discover the rich flavours of our cuisine. We invite you to take a
           look at full menu.
