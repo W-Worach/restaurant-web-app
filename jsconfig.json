@@ -8,7 +8,8 @@
       "@/services/*": ["services/*"],
       "@/pages/*": ["pages/*"],
       "@/context/*": ["context/*"],
-      "@/styles/*": ["styles/*"]
+      "@/styles/*": ["styles/*"],
+      "@/hooks/*": ["hooks/*"]
     }
   }
 }

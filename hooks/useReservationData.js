@@ -12,22 +12,20 @@ const useReservationData = (token) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const tablesResponse = await getTables();
-        const reservationsResponse = token
-          ? await getAllReservations(token)
-          : [];
-        setData({ tables: tablesResponse, reservations: reservationsResponse });
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const tablesResponse = await getTables();
+      const reservationsResponse = token ? await getAllReservations(token) : [];
+      setData({ tables: tablesResponse, reservations: reservationsResponse });
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [token]);
 
@@ -75,6 +73,7 @@ const useReservationData = (token) => {
     error,
     addReservation,
     filterReservations,
+    fetchData,
   };
 };
 

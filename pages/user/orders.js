@@ -1,6 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
-import { getOrdersByUserId } from "@/services/OrderService";
+import {
+  getOrdersByUserId,
+  changeStatusToReadyToPay,
+} from "@/services/OrderService";
 import OrdersList from "@/components/orders/OrdersList";
 
 const OrdersPage = () => {
@@ -8,7 +11,7 @@ const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     if (userId && token) {
@@ -25,13 +28,27 @@ const OrdersPage = () => {
     }
   }, [userId, token]);
 
+  const handleStatusChange = async (orderId, newStatus) => {
+    try {
+      await changeStatusToReadyToPay(orderId, token);
+      // Aktualizuj stan zamówień po zmianie statusu
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.id === orderId ? { ...order, status: newStatus } : order
+        )
+      );
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   const filteredOrders = () => {
     switch (filter) {
-      case 'active':
-        return orders.filter(order => [1, 2, 3].includes(order.status));
-      case 'completed':
-        return orders.filter(order => order.status === 4);
-      case 'all':
+      case "active":
+        return orders.filter((order) => [1, 2, 3].includes(order.status));
+      case "completed":
+        return orders.filter((order) => order.status === 4);
+      case "all":
       default:
         return orders;
     }
@@ -58,25 +75,28 @@ const OrdersPage = () => {
       <h1 className="text-2xl font-bold text-center mb-6">Twoje zamówienia</h1>
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
         <button
-          onClick={() => setFilter('all')}
-          className={`py-2 px-10 font-bold rounded ${filter === 'all' ? 'bg-blue-500 text-white' : 'border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'} w-40`}
+          onClick={() => setFilter("all")}
+          className={`py-2 px-10 font-bold rounded ${filter === "all" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
         >
           Wszystkie
         </button>
         <button
-          onClick={() => setFilter('active')}
-          className={`py-2 px-10 font-bold rounded ${filter === 'active' ? 'bg-blue-500 text-white' : 'border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'} w-40`}
+          onClick={() => setFilter("active")}
+          className={`py-2 px-10 font-bold rounded ${filter === "active" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
         >
           Aktywne
         </button>
         <button
-          onClick={() => setFilter('completed')}
-          className={`py-2 px-10 font-bold rounded ${filter === 'completed' ? 'bg-blue-500 text-white' : 'border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white'} w-40`}
+          onClick={() => setFilter("completed")}
+          className={`py-2 px-10 font-bold rounded ${filter === "completed" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
         >
           Zakończone
         </button>
       </div>
-      <OrdersList orders={filteredOrders()} />
+      <OrdersList
+        orders={filteredOrders()}
+        onStatusChange={handleStatusChange}
+      />
     </div>
   );
 };

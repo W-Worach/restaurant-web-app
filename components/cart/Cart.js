@@ -1,6 +1,13 @@
 import React from "react";
 
-const Cart = ({ items, removeFromCart, updateQuantity, submitOrder }) => {
+const Cart = ({
+  items,
+  removeFromCart,
+  updateQuantity,
+  submitOrder,
+  orderStatus,
+  setOrderStatus,
+}) => {
   const getTotalSum = () => {
     return items.reduce(
       (sum, { item, quantity }) => sum + item.price * quantity,
@@ -8,9 +15,21 @@ const Cart = ({ items, removeFromCart, updateQuantity, submitOrder }) => {
     );
   };
 
+  const handleChangeQuantity = (item, quantity) => {
+    updateQuantity(item, parseInt(quantity));
+    if (orderStatus) {
+      setOrderStatus("");
+    }
+  };
+
   return (
     <div className="bg-white shadow-xl rounded-lg p-4 m-2">
       <h2 className="text-xl font-bold mb-4">Koszyk</h2>
+      {orderStatus && items.length === 0 && (
+        <div className="p-3 mb-4 text-center text-green-800 bg-green-200 rounded">
+          {orderStatus}
+        </div>
+      )}
       {items.length > 0 ? (
         <ul>
           {items.map((cartItem, index) => (
@@ -23,7 +42,7 @@ const Cart = ({ items, removeFromCart, updateQuantity, submitOrder }) => {
                   type="number"
                   value={cartItem.quantity}
                   onChange={(e) =>
-                    updateQuantity(cartItem.item, parseInt(e.target.value))
+                    handleChangeQuantity(cartItem.item, e.target.value)
                   }
                   className="form-input mx-2 text-center w-10"
                   min="1"
@@ -55,7 +74,9 @@ const Cart = ({ items, removeFromCart, updateQuantity, submitOrder }) => {
           </div>
         </ul>
       ) : (
-        <div className="text-center text-xl">Twój koszyk jest pusty</div>
+        !orderStatus && (
+          <div className="text-center text-xl">Twój koszyk jest pusty</div>
+        )
       )}
     </div>
   );

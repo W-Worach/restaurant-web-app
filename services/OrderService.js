@@ -8,7 +8,6 @@ const getOrdersByUserId = async (userId, token) => {
       "Content-Type": "application/json",
     },
   });
-
   if (!response.ok) {
     throw new Error("Problem z pobieraniem zamówień. " + response.statusText);
   }
@@ -28,7 +27,12 @@ const createOrder = async (orderData, token) => {
   if (!response.ok) {
     throw new Error("Problem z tworzeniem zamówienia. " + response.statusText);
   }
-  return response.json();
+  const contentType = response.headers.get("content-type");
+  if (contentType && contentType.includes("application/json")) {
+    return response.json();
+  } else {
+    return response.text();
+  }
 };
 
 const changeStatusToReadyToPay = async (orderId, token) => {
@@ -42,11 +46,17 @@ const changeStatusToReadyToPay = async (orderId, token) => {
       },
     }
   );
-
   if (!response.ok) {
-    throw new Error("Problem z tworzeniem zamówienia. " + response.statusText);
+    throw new Error(
+      "Problem z aktualizacją statusu zamówienia. " + response.statusText
+    );
   }
-  return response.json();
+  const text = await response.text();
+  try {
+    return text ? JSON.parse(text) : {};
+  } catch (error) {
+    throw new Error("Error parsing response: " + error.message);
+  }
 };
 
 export { getOrdersByUserId, createOrder, changeStatusToReadyToPay };

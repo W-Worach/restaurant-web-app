@@ -3,7 +3,8 @@ import { AuthContext } from "@/context/AuthContext";
 import TableSelector from "@/components/reservations/TableSelector";
 import DatePicker from "@/components/reservations/DatePicker";
 import TimeRangePicker from "@/components/reservations/TimeRangePicker";
-import useReservationData from "hooks/useReservationData";
+import useReservationData from "@/hooks/useReservationData";
+import MessageAlert from "@/components/reservations/MessageAlert";
 import moment from "moment";
 
 const ReservationsPage = () => {
@@ -11,40 +12,40 @@ const ReservationsPage = () => {
   const {
     tables,
     filteredReservations,
-    isLoading,
-    error,
     addReservation,
     filterReservations,
   } = useReservationData(token);
+
   const [selectedTableId, setSelectedTableId] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [timeRange, setTimeRange] = useState({ from: "", to: "" });
   const [formError, setFormError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleTableChange = (e) => {
     setSelectedTableId(e.target.value);
     filterReservations(e.target.value, selectedDate);
   };
+
   const handleDateChange = (e) => {
     setSelectedDate(e.target.value);
     filterReservations(selectedTableId, e.target.value);
   };
+
   const handleTimeChange = (field, value) =>
     setTimeRange((prev) => ({ ...prev, [field]: value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFormError("");
+    setSuccessMessage("");
     if (!selectedTableId || !selectedDate || !timeRange.from || !timeRange.to) {
-      setFormError("Please fill in all fields.");
+      setFormError("Proszę wypełnić wszystkie pola.");
       return;
     }
 
-    const selectedFromDate = moment(`${selectedDate}T${timeRange.from}`).format(
-      "YYYY-MM-DDTHH:mm:ss"
-    );
-    const selectedToDate = moment(`${selectedDate}T${timeRange.to}`).format(
-      "YYYY-MM-DDTHH:mm:ss"
-    );
+    const selectedFromDate = moment(`${selectedDate}T${timeRange.from}`).format("YYYY-MM-DDTHH:mm:ss");
+    const selectedToDate = moment(`${selectedDate}T${timeRange.to}`).format("YYYY-MM-DDTHH:mm:ss");
 
     try {
       const message = await addReservation({
@@ -53,20 +54,17 @@ const ReservationsPage = () => {
         identityUserId: userId,
         tableModelId: selectedTableId,
       });
-      setFormError(`Reservation successful: ${message}`);
+      setSuccessMessage(`Sukces: ${message}`);
     } catch (err) {
       setFormError(err.message);
     }
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
   return (
-    <div className="container mx-auto px-4 py-8 w-3/4">
-      <h1 className="text-2xl font-bold mb-4 text-center">
-        Create a Reservation
-      </h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-4 text-center">Stwórz Rezerwację</h1>
+      <MessageAlert message={formError} type="error" />
+      <MessageAlert message={successMessage} type="success" />
       <form onSubmit={handleSubmit} className="space-y-4">
         <TableSelector
           tables={tables}
@@ -108,7 +106,6 @@ const ReservationsPage = () => {
             </ul>
           </div>
         )}
-        {formError && <p className="text-red-500 text-center">{formError}</p>}
       </form>
     </div>
   );

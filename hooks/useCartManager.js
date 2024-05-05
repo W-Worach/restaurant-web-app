@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { createOrder } from "@/services/OrderService";
 
-const useCartManager = ({ children }) => {
+const useCartManager = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [orderStatus, setOrderStatus] = useState("");
 
   const addToCart = (item) => {
     setCartItems((currentItems) => {
@@ -55,6 +56,7 @@ const useCartManager = ({ children }) => {
       const result = await createOrder(orderData, token);
       console.log("Order submitted successfully:", result);
       setCartItems([]);
+      setOrderStatus("Zamówienie zostało złożone poprawnie!");
       return result;
     } catch (error) {
       console.error("Error submitting order:", error);
@@ -62,13 +64,15 @@ const useCartManager = ({ children }) => {
     }
   };
 
-  return children({
+  return {
     cartItems,
     addToCart,
     removeFromCart,
     updateQuantity,
     submitOrder,
-  });
+    orderStatus,
+    setOrderStatus,
+  };
 };
 
 export default useCartManager;

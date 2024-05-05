@@ -15,6 +15,8 @@ const customJestConfig = {
   moduleNameMapper: {
     "^@/components/(.*)$": "<rootDir>/components/$1",
     "^@/services/(.*)$": "<rootDir>/services/$1",
+    "^@/pages/(.*)$": "<rootDir>/pages/$1",
+    "^@/hooks/(.*)$": "<rootDir>/hooks/$1",
     // Add other aliases as needed
   },
 };
