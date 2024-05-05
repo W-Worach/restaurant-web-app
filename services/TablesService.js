@@ -6,7 +6,7 @@ const getTables = async () => {
   });
 
   if (!response.ok) {
-    throw new Error("Problem z pobieraniem stołów. " + response.statusText);
+    throw new Error("Table downloading problem. " + response.statusText);
   }
   return response.json();
 };

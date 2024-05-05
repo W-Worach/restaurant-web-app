@@ -71,25 +71,25 @@ const OrdersPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl bg-gray-50">
-      <h1 className="text-2xl font-bold text-center mb-6">Twoje zamówienia</h1>
+      <h1 className="text-2xl font-bold text-center mb-6">Your Orders</h1>
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
         <button
           onClick={() => setFilter("all")}
           className="py-2 px-10 font-bold rounded bg-blue-500 text-white w-40"
         >
-          Wszystkie
+          All
         </button>
         <button
           onClick={() => setFilter("active")}
           className="py-2 px-10 font-bold rounded bg-blue-500 text-white w-40"
         >
-          Aktywne
+          Active
         </button>
         <button
           onClick={() => setFilter("completed")}
           className="py-2 px-10 font-bold rounded bg-blue-500 text-white w-40"
         >
-          Zakończone
+          Completed
         </button>
       </div>
       <OrdersList

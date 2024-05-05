@@ -9,7 +9,7 @@ const getOrdersByUserId = async (userId, token) => {
     },
   });
   if (!response.ok) {
-    throw new Error("Problem z pobieraniem zamówień. " + response.statusText);
+    throw new Error("Problem with downloading orders. " + response.statusText);
   }
   return response.json();
 };
@@ -25,7 +25,7 @@ const createOrder = async (orderData, token) => {
   });
 
   if (!response.ok) {
-    throw new Error("Problem z tworzeniem zamówienia. " + response.statusText);
+    throw new Error("Problem with order creation. " + response.statusText);
   }
   const contentType = response.headers.get("content-type");
   if (contentType && contentType.includes("application/json")) {
@@ -48,7 +48,7 @@ const changeStatusToReadyToPay = async (orderId, token) => {
   );
   if (!response.ok) {
     throw new Error(
-      "Problem z aktualizacją statusu zamówienia. " + response.statusText
+      "Problem with updating order status. " + response.statusText
     );
   }
   const text = await response.text();

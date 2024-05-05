@@ -7,62 +7,61 @@ export default function Home() {
 
   return (
     <div className="font-sans">
-      {/* Sekcja powitalna */}
+      {/* Welcome section */}
       <section className="welcome-section text-center py-20 bg-gray-100">
         <h1 className="text-4xl font-bold text-gray-800">
-          Witaj w naszej restauracji!
+          Welcome to our restaurant!
         </h1>
         <p className="text-xl mt-4 text-gray-600">
-          Odkryj smaki, które zapamiętasz na zawsze.
+          Discover flavours you will remember forever.
         </p>
       </section>
 
-      {/* Sekcja menu */}
+      {/* Menu section */}
       <section className="menu-section text-center py-20">
         <h2 className="text-3xl font-bold text-gray-800">Poznaj nasze menu</h2>
         <p className="text-xl mt-4 text-gray-600">
-          Odkryj bogactwo smaków naszej kuchni. Zapraszamy do zapoznania się z
-          pełnym menu.
+          Discover the rich flavours of our cuisine. We invite you to take a
+          look at full menu.
         </p>
         <Link
           href="/menu"
           className="mt-8 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
         >
-          Zobacz menu
+          See menu
         </Link>
       </section>
 
-      {/* Sekcja o restauracji */}
+      {/* Section on the restaurant */}
       <section className="about-section text-center py-20 bg-gray-100">
         <h2 className="text-3xl font-bold text-gray-800">
-          O naszej restauracji
+          About our restaurant
         </h2>
         <p className="text-xl mt-4 text-gray-600">
-          Poznaj historię naszej restauracji i pasję, z którą tworzymy nasze
-          dania.
+          Learn about the history of our restaurant and the passion with which
+          we create our dishes.
         </p>
         <Link
           href="/about"
           className="mt-8 inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
         >
-          Dowiedz się więcej
+          Find out more
         </Link>
       </section>
 
-      {/* Sekcja rezerwacji */}
+      {/* Reservation section */}
       <section className="reservation-section text-center py-20">
-        <h2 className="text-3xl font-bold text-gray-800">
-          Rezerwacja stolików
-        </h2>
+        <h2 className="text-3xl font-bold text-gray-800">Table reservations</h2>
         <p className="text-xl mt-4 text-gray-600">
           {isLoggedIn ? (
             <>
-              Planujesz specjalne spotkanie lub po prostu chcesz zarezerwować
-              stolik? Skorzystaj z naszego systemu rezerwacji online.
+              Are you planning a special meeting or just want to book a a table?
+              Use our online booking system.
             </>
           ) : (
             <>
-              Funkcja rezerwacji jest dostępna tylko dla zarejestrowanych użytkowników.
+              The booking function is only available to registered users users
+              of.
             </>
           )}
         </p>
@@ -71,29 +70,29 @@ export default function Home() {
             href="/reservations"
             className="mt-8 inline-block bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600"
           >
-            Zarezerwuj stolik
+            Book a table
           </Link>
         ) : (
           <Link
             href="/register"
             className="mt-8 inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
           >
-            Zarejestruj się
+            Sign up
           </Link>
         )}
       </section>
 
-      {/* Sekcja kontaktowa */}
+      {/* Contact section */}
       <section className="contact-section text-center py-20 bg-gray-100">
         <h2 className="text-3xl font-bold text-gray-800">Kontakt</h2>
         <p className="text-xl mt-4 text-gray-600">
-          Masz pytania? Skontaktuj się z nami!
+          Do you have questions? Get in touch with us!
         </p>
         <Link
           href="/contact"
           className="mt-8 inline-block bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600"
         >
-          Skontaktuj się
+          Contact
         </Link>
       </section>
     </div>

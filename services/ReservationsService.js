@@ -10,7 +10,7 @@ const getAllReservations = async (token) => {
   });
 
   if (!response.ok) {
-    throw new Error("Problem z pobieraniem rezerwacji. " + response.statusText);
+    throw new Error("Problem with downloading reservations. " + response.statusText);
   }
   return response.json();
 };
@@ -50,7 +50,7 @@ const getAllUserReservations = async (token, userId) => {
   );
 
   if (!response.ok) {
-    throw new Error("Problem z pobieraniem rezerwacji. " + response.statusText);
+    throw new Error("Problem with downloading reservations. " + response.statusText);
   }
   return response.json();
 };
@@ -68,7 +68,7 @@ const deleteUserReservation = async (token, reservationId) => {
   );
 
   if (!response.ok) {
-    throw new Error("Problem z usuwaniem rezerwacji. " + response.statusText);
+    throw new Error("Problem with deleting reservations. " + response.statusText);
   }
 
   try {

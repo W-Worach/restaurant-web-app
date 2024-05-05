@@ -11,15 +11,15 @@ const OrdersList = ({ orders, onStatusChange }) => {
   const getStatusText = (statusNumber) => {
     switch (statusNumber) {
       case 1:
-        return "Gotowe"; //Ready
+        return "Ready";
       case 2:
-        return "W Trakcie Przygotowania"; //Working
+        return "Working";
       case 3:
-        return "Gotowe Do Zapłaty"; //ReadyToPay
+        return "Ready To Pay";
       case 4:
-        return "Zapłacone"; //Paid
+        return "Paid";
       default:
-        return "Nieznany status"; //Unknown
+        return "Unknown status";
     }
   };
 
@@ -38,21 +38,19 @@ const OrdersList = ({ orders, onStatusChange }) => {
             key={order.id}
             className="mb-4 p-4 border border-gray-200 rounded-lg shadow-lg"
           >
-            <h3 className="font-bold text-lg">Numer zamówienia: {order.id}</h3>
+            <h3 className="font-bold text-lg">Order number: {order.id}</h3>
             <p
               className={`badge ${statusStyles[order.status]} text-white px-2 py-1 rounded-full`}
             >
               Status: {getStatusText(order.status)}
             </p>
+            <p className="mt-1 ml-2">Cost: {formatCurrency(order.price)}</p>
             <p className="mt-1 ml-2">
-              Pełny koszt: {formatCurrency(order.price)}
-            </p>
-            <p className="mt-1 ml-2">
-              Numer stołu: {order.tableModel.id} (Ilość miejsc:{" "}
+              Table number: {order.tableModel.id} (Number of seats:{" "}
               {order.tableModel.numberOfSeats})
             </p>
             <div className="mt-2">
-              <h4 className="font-bold">zamówione jedzenie:</h4>
+              <h4 className="font-bold">Food ordered:</h4>
               {order.dishModels.map((dish) => (
                 <p key={dish.id} className="ml-2">
                   {dish.name} - {formatCurrency(dish.price)}
@@ -64,15 +62,13 @@ const OrdersList = ({ orders, onStatusChange }) => {
                 className="mt-4 bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 onClick={() => onStatusChange(order.id, 3)}
               >
-                Oznacz jako Gotowe Do Zapłaty
+                Mark as Ready for Payment
               </button>
             )}
           </div>
         ))
       ) : (
-        <p className="text-center text-lg text-gray-600">
-          Brak aktywnych zamówień.
-        </p>
+        <p className="text-center text-lg text-gray-600">No active orders.</p>
       )}
     </div>
   );

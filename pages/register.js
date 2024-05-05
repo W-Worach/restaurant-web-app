@@ -7,9 +7,9 @@ const RegisterPage = () => {
     <div className="container mx-auto">
       <RegisterForm />
       <div className="mt-4 text-center">
-        Masz konto?{" "}
+        You have an account?{" "}
         <Link href="/login" className="text-blue-500 hover:underline">
-          Zaloguj się tutaj
+          Log in here
         </Link>
       </div>
     </div>

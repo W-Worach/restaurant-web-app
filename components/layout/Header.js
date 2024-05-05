@@ -28,16 +28,22 @@ function Header() {
           {isLoggedIn ? (
             <>
               <Link
+                href="/reservations"
+                className="text-gray-900 hover:text-blue-600 transition duration-200"
+              >
+                Reservations
+              </Link>
+              <Link
                 href="/user"
                 className="text-gray-900 hover:text-blue-600 transition duration-200"
               >
-                Profil
+                Profile
               </Link>
               <button
                 onClick={handleLogout}
                 className="text-gray-900 hover:text-blue-600 transition duration-200"
               >
-                Wyloguj się
+                Log out
               </button>
             </>
           ) : (
@@ -46,13 +52,13 @@ function Header() {
                 href="/login"
                 className="text-gray-900 hover:text-blue-600 transition duration-200"
               >
-                Logowanie
+                Log in
               </Link>
               <Link
                 href="/register"
                 className="text-gray-900 hover:text-blue-600 transition duration-200"
               >
-                Rejestracja
+                Sign in
               </Link>
             </>
           )}

@@ -5,7 +5,7 @@ const ReservationsList = ({
   reservations,
   onDelete,
   setReservations,
-  setError, // Make sure setError is passed as a prop
+  setError, 
 }) => {
   const isMoreThan24HoursAhead = (reservationDate) => {
     const now = moment();
@@ -21,7 +21,7 @@ const ReservationsList = ({
           prev.filter((res) => res.id !== reservationId)
         );
       } catch (err) {
-        setError(err.message); // Use setError here
+        setError(err.message);
       }
     }
   };

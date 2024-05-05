@@ -9,7 +9,7 @@ const LoginForm = () => {
 
   const validateForm = () => {
     if (username.length === 0 || password.length === 0) {
-      setError("Nazwa użytkownika i hasło są wymagane.");
+      setError("Username and password required.");
       return false;
     }
     return true;
@@ -25,11 +25,11 @@ const LoginForm = () => {
       const response = await login(username, password);
       localStorage.setItem("token", response.token);
       localStorage.setItem("userId", response.userId);
-      console.log("Logowanie pomyślne:", response);
+      console.log("Login successful:", response);
       window.location.href = "/";
     } catch (error) {
-      console.error("Błąd podczas logowania:", error);
-      setError("Nieudane logowanie. Sprawdź swoje dane i spróbuj ponownie.");
+      console.error("Error while logging in:", error);
+      setError("Failed login. Please check your details and try again.");
     }
     setLoading(false);
   };
@@ -41,7 +41,7 @@ const LoginForm = () => {
       <form
         onSubmit={handleSubmit}
         className="space-y-4"
-        aria-label="Formularz logowania"
+        aria-label="Login form"
       >
         <div>
           <label htmlFor="username" className="block mb-1">
@@ -80,7 +80,7 @@ const LoginForm = () => {
           disabled={loading}
           className={`w-full py-2 rounded-md transition duration-300 ${loading ? "bg-gray-500" : "bg-blue-500 text-white hover:bg-blue-600"}`}
         >
-          {loading ? "Logowanie..." : "Login"}
+          {loading ? "Loading..." : "Login"}
         </button>
       </form>
     </div>

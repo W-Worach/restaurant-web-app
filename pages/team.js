@@ -6,10 +6,10 @@ export default function Team() {
         <div className="font-sans bg-gray-50 min-h-screen">
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-4xl font-bold text-center text-gray-800">
-                    Nasz Zespół
+                Our Team
                 </h1>
                 <p className="text-xl text-center text-gray-600 mt-4">
-                    Poznaj fantastycznych ludzi, którzy tworzą naszą restaurację.
+                Meet the fantastic people who make up our restaurant.
                 </p>
                 <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {teamMembers.map((member, index) => (
@@ -40,20 +40,20 @@ export default function Team() {
 const teamMembers = [
     {
         name: "John Doe",
-        role: "Szef Kuchni",
-        bio: "John jest pasjonatem kulinarnym z 20 lat doświadczenia w najlepszych kuchniach świata.",
+        role: "Chef",
+        bio: "John is a passionate chef with 20 years of experience in some of the world's best kitchens.",
         photo: "/images/john_doe.jpg",
     },
     {
         name: "Anna Smith",
         role: "Manager",
-        bio: "Anna zarządza naszym zespołem z niezwykłą starannością i zaangażowaniem.",
+        bio: "Anna manages our team with extreme care and commitment.",
         photo: "/images/anna_smith.jpg",
     },
     {
         name: "Tom Brown",
-        role: "Barman",
-        bio: "Tom tworzy innowacyjne koktajle, które zachwycają naszych gości.",
+        role: "Bartender",
+        bio: "Tom creates innovative cocktails that delight our guests.",
         photo: "/images/tom_brown.jpg",
     }
 ];

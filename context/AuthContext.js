@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import useAutoLogout from "hooks/useAutoLogout";
 
 export const AuthContext = createContext();
 

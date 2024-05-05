@@ -7,9 +7,9 @@ const LoginPage = () => {
     <div className="container mx-auto">
       <LoginForm />
       <div className="mt-4 text-center">
-        Nie masz jeszcze konta?{" "}
+        You do not have an account yet?{" "}
         <Link href="/register" className="text-blue-500 hover:underline">
-          Zarejestruj się tutaj
+          Register here
         </Link>
       </div>
     </div>

@@ -8,11 +8,11 @@ const TableSelector = ({ tables, selectedTableId, onTableSelect }) => {
         onChange={(e) => onTableSelect(Number(e.target.value))}
       >
         <option value="" disabled>
-          Wybierz stół...
+          Choose Table...
         </option>
         {tables.map((table) => (
           <option key={table.id} value={table.id} disabled={!table.isAvailable}>
-            Stół {table.id} - {table.numberOfSeats} Siedzeń (
+            Table {table.id} - {table.numberOfSeats} chairs (
             {table.isAvailable ? "Available" : "Unavailable"})
           </option>
         ))}

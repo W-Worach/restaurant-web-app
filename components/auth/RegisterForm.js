@@ -13,15 +13,15 @@ const RegisterForm = () => {
 
   const validateForm = () => {
     if (!username || !email || !password || !confirmPassword) {
-      setError("Wszystkie pola są wymagane.");
+      setError("All fields are required.");
       return false;
     }
     if (password !== confirmPassword) {
-      setError("Hasła nie są identyczne.");
+      setError("Passwords are not the same.");
       return false;
     }
     if (password.length < 8) {
-      setError("Hasło musi mieć co najmniej 8 znaków.");
+      setError("Password must be at least 8 characters long.");
       return false;
     }
     const strongPassword = new RegExp(
@@ -29,7 +29,7 @@ const RegisterForm = () => {
     );
     if (!strongPassword.test(password)) {
       setError(
-        "Hasło musi zawierać małe i duże litery, cyfry oraz znaki specjalne."
+        "The password must contain small and capital letters, numbers and special characters."
       );
       return false;
     }
@@ -45,18 +45,18 @@ const RegisterForm = () => {
     try {
       const response = await register(username, email, password);
       localStorage.setItem("token", response.token);
-      console.log("Rejestracja pomyślna:", response);
+      console.log("Registration successful:", response);
       router.push("/");
     } catch (error) {
       console.error("Błąd podczas rejestracji:", error);
-      setError("Rejestracja nieudana. Spróbuj ponownie.");
+      setError("Registration unsuccessful. Try again.");
     }
     setLoading(false);
   };
 
   return (
     <div className="max-w-md mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Rejestracja</h2>
+      <h2 className="text-2xl font-bold mb-4">Registration</h2>
       {error && <p className="text-red-500">{error}</p>}
       <form
         onSubmit={handleSubmit}
@@ -65,7 +65,7 @@ const RegisterForm = () => {
       >
         <div>
           <label htmlFor="username" className="block mb-1">
-            Nazwa użytkownika:
+            Username:
           </label>
           <input
             type="text"
@@ -97,7 +97,7 @@ const RegisterForm = () => {
         </div>
         <div>
           <label htmlFor="password" className="block mb-1">
-            Hasło:
+            Password:
           </label>
           <input
             type="password"

@@ -70,28 +70,28 @@ const ReservationsPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl bg-gray-50">
-      <h1 className="text-2xl font-bold text-center mb-6">Twoje Rezerwacje</h1>
+      <h1 className="text-2xl font-bold text-center mb-6">Your Reservations</h1>
       <p className="text-center mb-6 text-gray-600">
-        Rezerwacje można anulować tylko 24 godziny przed ich rozpoczęciem.
+        Reservations can only be cancelled 24 hours in advance.
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
         <button
           onClick={() => setFilter("all")}
           className={`py-2 px-10 font-bold rounded ${filter === "all" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
         >
-          Wszystkie
+          All
         </button>
         <button
           onClick={() => setFilter("active")}
           className={`py-2 px-10 font-bold rounded ${filter === "active" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
         >
-          Aktywne
+          Active
         </button>
         <button
           onClick={() => setFilter("completed")}
           className={`py-2 px-10 font-bold rounded ${filter === "completed" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
         >
-          Zakończone
+          Completed
         </button>
       </div>
       <ReservationsList

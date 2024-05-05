@@ -53,7 +53,7 @@ const MenuPage = () => {
         {isLoggedIn ? (
           <>
             <div className="m-2 mb-4 shadow-lg p-4 rounded-lg bg-white">
-              <h2 className="text-lg font-semibold mb-2">Wybierz Stół</h2>
+              <h2 className="text-lg font-semibold mb-2">Choose Table</h2>
               <TableSelector
                 tables={tables}
                 selectedTableId={selectedTableId}
@@ -77,7 +77,7 @@ const MenuPage = () => {
           </>
         ) : (
           <div className="text-lg text-center font-semibold my-20">
-            Zaloguj się, żeby zamówić jedzenie.
+            Log in to order food.
           </div>
         )}
       </div>

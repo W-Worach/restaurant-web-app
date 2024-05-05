@@ -40,7 +40,7 @@ const ReservationsPage = () => {
     setFormError("");
     setSuccessMessage("");
     if (!selectedTableId || !selectedDate || !timeRange.from || !timeRange.to) {
-      setFormError("Proszę wypełnić wszystkie pola.");
+      setFormError("Please complete all fields.");
       return;
     }
 
@@ -54,7 +54,7 @@ const ReservationsPage = () => {
         identityUserId: userId,
         tableModelId: selectedTableId,
       });
-      setSuccessMessage(`Sukces: ${message}`);
+      setSuccessMessage(`Succes: ${message}`);
     } catch (err) {
       setFormError(err.message);
     }
@@ -62,7 +62,7 @@ const ReservationsPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4 text-center">Stwórz Rezerwację</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Create a Booking</h1>
       <MessageAlert message={formError} type="error" />
       <MessageAlert message={successMessage} type="success" />
       <form onSubmit={handleSubmit} className="space-y-4">

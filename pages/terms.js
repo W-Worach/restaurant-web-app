@@ -12,36 +12,33 @@ const TermsPage = () => {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Wprowadzenie</h2>
           <p>
-            Witamy na naszej stronie internetowej. Korzystając z naszej strony,
-            zgadzasz się na przestrzeganie poniższego regulaminu, który wraz z
-            naszą polityką prywatności reguluje nasze relacje z Tobą w związku z
-            tą stroną internetową.
+            Welcome to our website. By using our site, you agree to be bound by
+            the following terms and conditions, which together with our privacy
+            policy, governs our relationship with you in relation to this
+            website.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Prawa autorskie</h2>
           <p>
-            Treść tej strony jest chroniona prawami autorskimi. Nie wolno
-            kopiować ani reprodukować żadnych materiałów bez naszej wyraźnej
-            zgody.
+            The content of this site is protected by copyright. You may not copy
+            or reproduce any material without our express permission.
+            permission.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Zmiany w regulaminie</h2>
           <p>
-            Możemy okresowo aktualizować ten regulamin. Zmiany zostaną
-            opublikowane na tej stronie.
+            We may update these rules from time to time. Changes will be
+            published on this page.
           </p>
         </section>
 
         <section>
           <h2 className="text-2xl font-semibold mb-4">Kontakt</h2>
-          <p>
-            Jeśli masz jakiekolwiek pytania dotyczące tego regulaminu, prosimy o
-            kontakt.
-          </p>
+          <p>If you have any questions about these rules, please contact.</p>
         </section>
       </div>
     </div>

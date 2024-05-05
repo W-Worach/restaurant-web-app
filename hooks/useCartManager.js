@@ -56,7 +56,7 @@ const useCartManager = () => {
       const result = await createOrder(orderData, token);
       console.log("Order submitted successfully:", result);
       setCartItems([]);
-      setOrderStatus("Zamówienie zostało złożone poprawnie!");
+      setOrderStatus("The order was placed correctly!");
       return result;
     } catch (error) {
       console.error("Error submitting order:", error);

@@ -67,7 +67,7 @@ describe("LoginForm", () => {
     userEvent.click(screen.getByRole("button", { name: "Login" }));
 
     await screen.findByText(
-      /Nieudane logowanie. Sprawdź swoje dane i spróbuj ponownie\./i
+      /Failed login. Please check your details and try again\./i
     );
   });
 });
