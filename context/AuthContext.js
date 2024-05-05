@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { jwtDecode } from "jwt-decode";
 
 export const AuthContext = createContext();
 
@@ -12,9 +13,24 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     const storedUserId = localStorage.getItem("userId");
-    setIsLoggedIn(!!storedToken);
-    setUserId(storedUserId);
-    setToken(storedToken);
+
+    if (storedToken) {
+      try {
+        const decodedToken = jwtDecode(storedToken);
+        const currentTime = Date.now() / 1000; // Convert to seconds since epoch
+
+        if (decodedToken.exp < currentTime) {
+          logout();
+        } else {
+          setIsLoggedIn(true);
+          setUserId(storedUserId);
+          setToken(storedToken);
+        }
+      } catch (error) {
+        console.error("Error decoding the token:", error);
+        logout(); 
+      }
+    }
   }, []);
 
   const logout = () => {
