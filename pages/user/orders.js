@@ -18,7 +18,7 @@ const OrdersPage = () => {
       setLoading(true);
       getOrdersByUserId(userId, token)
         .then((data) => {
-          setOrders(data);
+          setOrders(data.reverse());
           setLoading(false);
         })
         .catch((err) => {
@@ -31,7 +31,6 @@ const OrdersPage = () => {
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       await changeStatusToReadyToPay(orderId, token);
-      // Aktualizuj stan zamówień po zmianie statusu
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
           order.id === orderId ? { ...order, status: newStatus } : order
@@ -76,19 +75,19 @@ const OrdersPage = () => {
       <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
         <button
           onClick={() => setFilter("all")}
-          className={`py-2 px-10 font-bold rounded ${filter === "all" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
+          className="py-2 px-10 font-bold rounded bg-blue-500 text-white w-40"
         >
           Wszystkie
         </button>
         <button
           onClick={() => setFilter("active")}
-          className={`py-2 px-10 font-bold rounded ${filter === "active" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
+          className="py-2 px-10 font-bold rounded bg-blue-500 text-white w-40"
         >
           Aktywne
         </button>
         <button
           onClick={() => setFilter("completed")}
-          className={`py-2 px-10 font-bold rounded ${filter === "completed" ? "bg-blue-500 text-white" : "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white"} w-40`}
+          className="py-2 px-10 font-bold rounded bg-blue-500 text-white w-40"
         >
           Zakończone
         </button>

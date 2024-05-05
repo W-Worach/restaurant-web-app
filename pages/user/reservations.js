@@ -1,4 +1,3 @@
-// ReservationsPage.js
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import {
@@ -19,7 +18,7 @@ const ReservationsPage = () => {
       setLoading(true);
       getAllUserReservations(token, userId)
         .then((data) => {
-          setReservations(data);
+          setReservations(data.reverse());
           setLoading(false);
         })
         .catch((err) => {
@@ -66,6 +65,8 @@ const ReservationsPage = () => {
       </div>
     );
   }
+
+  console.log("setError is:", typeof setError);
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl bg-gray-50">
