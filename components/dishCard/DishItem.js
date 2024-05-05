@@ -6,6 +6,7 @@ const DishItem = ({ item, addToCart, showAddToCart }) => {
     <li
       className="w-64 bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out p-6 m-2 mx-auto flex flex-col items-center text-center"
       style={{ width: "250px" }}
+      item={JSON.stringify(item)}
     >
       <Image
         src="/placeholder200x200.png"

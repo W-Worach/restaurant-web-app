@@ -9,7 +9,7 @@ const DishList = ({ items, addToCart, showAddToCart }) => {
           key={item.id}
           item={item}
           addToCart={addToCart}
-          showAddToCart={showAddToCart}
+          showAddToCart={showAddToCart && item.availability}
         />
       ))}
     </ul>

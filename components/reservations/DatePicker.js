@@ -2,12 +2,15 @@ import React from 'react';
 import moment from 'moment';
 
 const DatePicker = ({ selectedDate, onDateChange }) => {
-  const minDate = moment().add(1, 'days').format('YYYY-MM-DD'); 
+  const minDate = moment().add(1, 'days').format('YYYY-MM-DD');
 
   return (
     <div className="flex flex-col items-center">
-      <label className="block text-lg font-medium text-gray-700">Date:</label>
+      <label htmlFor="datePicker" className="block text-lg font-medium text-gray-700">
+        Date:
+      </label>
       <input
+        id="datePicker"
         type="date"
         value={selectedDate}
         onChange={onDateChange}

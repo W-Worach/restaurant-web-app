@@ -50,7 +50,10 @@ describe("LoginForm", () => {
     userEvent.click(screen.getByRole("button", { name: "Login" }));
 
     await waitFor(() => {
-      expect(AuthService.login).toHaveBeenCalledWith("testuser", "Password123!");
+      expect(AuthService.login).toHaveBeenCalledWith(
+        "testuser",
+        "Password123!"
+      );
     });
 
     expect(localStorage.setItem).toHaveBeenCalledWith("token", "fake-token");
@@ -69,5 +72,20 @@ describe("LoginForm", () => {
     await screen.findByText(
       /Failed login. Please check your details and try again\./i
     );
+  });
+
+  it("handles login failure correctly", async () => {
+    const errorMessage = "Invalid credentials";
+    AuthService.login.mockRejectedValue(new Error(errorMessage));
+
+    render(<LoginForm />);
+    await userEvent.type(screen.getByLabelText("Username:"), "testuser");
+    await userEvent.type(screen.getByLabelText("Password:"), "wrongpassword");
+    userEvent.click(screen.getByRole("button", { name: "Login" }));
+
+    const errorDisplay = await screen.findByText(
+      /Failed login. Please check your details and try again./i
+    );
+    expect(errorDisplay).toBeInTheDocument();
   });
 });

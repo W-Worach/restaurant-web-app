@@ -11,13 +11,13 @@ function Footer() {
             href="/contact"
             className="px-3 py-2 hover:text-gray-300 transition duration-200"
           >
-            Kontakt
+            Contact
           </Link>
           <Link
             href="/terms"
             className="px-3 py-2 hover:text-gray-300 transition duration-200"
           >
-            Regulamin
+            Terms
           </Link>
         </nav>
       </div>

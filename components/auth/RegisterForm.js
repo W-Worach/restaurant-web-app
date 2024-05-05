@@ -48,7 +48,7 @@ const RegisterForm = () => {
       console.log("Registration successful:", response);
       router.push("/");
     } catch (error) {
-      console.error("Błąd podczas rejestracji:", error);
+      console.error("Error during registration:", error);
       setError("Registration unsuccessful. Try again.");
     }
     setLoading(false);
@@ -61,7 +61,7 @@ const RegisterForm = () => {
       <form
         onSubmit={handleSubmit}
         className="space-y-4"
-        aria-label="Formularz rejestracji"
+        aria-label="Register form"
       >
         <div>
           <label htmlFor="username" className="block mb-1">
@@ -113,7 +113,7 @@ const RegisterForm = () => {
         </div>
         <div>
           <label htmlFor="confirmPassword" className="block mb-1">
-            Potwierdź hasło:
+            Confirm password:
           </label>
           <input
             type="password"
@@ -132,7 +132,7 @@ const RegisterForm = () => {
           disabled={loading}
           className={`w-full py-2 rounded-md transition duration-300 ${loading ? "bg-gray-500 text-white" : "bg-blue-500 text-white hover:bg-blue-600"}`}
         >
-          {loading ? "Rejestrowanie..." : "Zarejestruj się"}
+          {loading ? "Loading..." : "Sign in"}
         </button>
       </form>
     </div>

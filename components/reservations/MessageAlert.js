@@ -7,7 +7,7 @@ const MessageAlert = ({ message, type }) => {
   const textColor = type === 'error' ? 'text-red-800' : 'text-green-800';
 
   return (
-    <div className={`${bgColor} text-center p-4 rounded-lg my-4 text-sm ${textColor}`}>
+    <div role="alert" className={`${bgColor} text-center p-4 rounded-lg my-4 text-sm ${textColor}`}>
       {message}
     </div>
   );

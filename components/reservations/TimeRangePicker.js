@@ -1,14 +1,20 @@
-import React from 'react';
+import React from "react";
 
 const TimeRangePicker = ({ timeRange, onTimeChange }) => {
   return (
     <div className="grid grid-cols-2 gap-4">
       <div className="flex flex-col items-center">
-        <label className="block text-lg font-medium text-gray-700">From:</label>
+        <label
+          htmlFor="fromInput"
+          className="block text-lg font-medium text-gray-700"
+        >
+          From:
+        </label>
         <input
+          id="fromInput"
           type="time"
           value={timeRange.from}
-          onChange={e => onTimeChange('from', e.target.value)}
+          onChange={(e) => onTimeChange("from", e.target.value)}
           min="00:00"
           max="23:59"
           required
@@ -16,11 +22,17 @@ const TimeRangePicker = ({ timeRange, onTimeChange }) => {
         />
       </div>
       <div className="flex flex-col items-center">
-        <label className="block text-lg font-medium text-gray-700">To:</label>
+        <label
+          htmlFor="toInput"
+          className="block text-lg font-medium text-gray-700"
+        >
+          To:
+        </label>
         <input
+          id="toInput"
           type="time"
           value={timeRange.to}
-          onChange={e => onTimeChange('to', e.target.value)}
+          onChange={(e) => onTimeChange("to", e.target.value)}
           min="00:00"
           max="23:59"
           required
