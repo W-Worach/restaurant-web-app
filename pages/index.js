@@ -84,7 +84,7 @@ export default function Home() {
 
       {/* Contact section */}
       <section className="contact-section text-center py-20 bg-gray-100">
-        <h2 className="text-3xl font-bold text-gray-800">Kontakt</h2>
+        <h2 className="text-3xl font-bold text-gray-800">Contact</h2>
         <p className="text-xl mt-4 text-gray-600">
           Do you have questions? Get in touch with us!
         </p>
