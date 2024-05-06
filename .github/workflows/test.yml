@@ -11,14 +11,30 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to use the latest version of the checkout action
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3  # Use the setup-node action to configure Node.js in the workflow
+        with:
+          node-version: '20'  # Specify the Node.js version you want to use (match your development environment)
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v3  # Use the cache action to cache dependencies and speed up workflow execution
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install Dependencies
-        run: |
-          npm install
-          echo "Dependencies Installed"
+        run: npm ci  # Use npm ci for installing dependencies to ensure a clean, reproducible build based on package-lock.json
+        env:
+          CI: true  # Set the CI environment variable to true, some npm packages behave differently on CI environments
 
       - name: Run Jest Tests
-        run: |
-          npm test
-          echo "Jest Tests Completed"
+        run: npm test
+        env:
+          CI: true  # Ensures that Jest runs in CI-mode, and for example, does not watch for file changes
+
+      - name: Output results
+        run: echo "Jest Tests Completed"
