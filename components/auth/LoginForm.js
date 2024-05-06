@@ -25,10 +25,8 @@ const LoginForm = () => {
       const response = await login(username, password);
       localStorage.setItem("token", response.token);
       localStorage.setItem("userId", response.userId);
-      console.log("Login successful:", response);
       window.location.href = "/";
     } catch (error) {
-      console.error("Error while logging in:", error);
       setError("Failed login. Please check your details and try again.");
     }
     setLoading(false);

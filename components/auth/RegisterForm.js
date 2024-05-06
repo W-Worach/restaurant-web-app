@@ -45,10 +45,8 @@ const RegisterForm = () => {
     try {
       const response = await register(username, email, password);
       localStorage.setItem("token", response.token);
-      console.log("Registration successful:", response);
       router.push("/");
     } catch (error) {
-      console.error("Error during registration:", error);
       setError("Registration unsuccessful. Try again.");
     }
     setLoading(false);

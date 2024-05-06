@@ -79,4 +79,16 @@ describe("useReservationData", () => {
     expect(createReservation).toHaveBeenCalled();
     expect(getAllReservations).toHaveBeenCalledTimes(2);
   });
+
+  it("handles empty reservations", async () => {
+    getAllReservations.mockResolvedValue([]);
+
+    const { result } = renderHook(() => useReservationData(token));
+
+    await waitFor(() => {
+      expect(result.current.reservations).toEqual([]);
+      expect(result.current.filteredReservations).toEqual([]);
+      expect(result.current.isLoading).toBeFalsy();
+    });
+  });
 });
