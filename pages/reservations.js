@@ -62,8 +62,8 @@ const ReservationsPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full">
-      <div className="container max-w-xl px-4 py-8">
+    <div className="flex justify-center items-center w-full ">
+      <div className="container max-w-xl px-4 py-8 bg-white">
         <h1 className="text-2xl font-bold mb-4 text-center">
           Create a Booking
         </h1>
@@ -76,7 +76,6 @@ const ReservationsPage = () => {
             onTableChange={handleTableChange}
           />
           <div className="flex justify-center">
-            {" "}
             <TableSelectorWithModal onTableSelect={setSelectedTableId} />
           </div>
           <DatePicker

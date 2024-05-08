@@ -3,7 +3,7 @@ import DishItem from "./DishItem";
 
 const DishList = ({ items, addToCart, showAddToCart }) => {
   return (
-    <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+    <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       {items.map((item) => (
         <DishItem
           key={item.id}

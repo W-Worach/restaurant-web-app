@@ -23,7 +23,7 @@ const Cart = ({
   };
 
   return (
-    <div className="bg-white shadow-xl rounded-lg p-4 m-2">
+    <div className="bg-white shadow-xl rounded-lg p-4 m-2 min-w-80">
       <label htmlFor="Cart" className="block text-lg font-medium text-gray-700 text-left">
         Cart:
       </label>

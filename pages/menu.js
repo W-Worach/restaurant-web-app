@@ -42,7 +42,7 @@ const MenuPage = () => {
   } = useCartManager();
 
   return (
-    <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row">
+    <div className="container mx-auto px-4 py-8 flex flex-col lg:flex-row">
       <div className="flex-1 mb-8 md:mb-0 md:mr-8">
         <DishList
           items={menuItems}
@@ -50,7 +50,7 @@ const MenuPage = () => {
           showAddToCart={isLoggedIn}
         />
       </div>
-      <div className="w-full md:w-1/3">
+      <div className="w-full lg:w-1/3">
         {isLoggedIn ? (
           <>
             <div className="m-2 mb-4 shadow-lg p-4 rounded-lg bg-white">
