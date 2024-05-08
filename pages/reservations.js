@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
-import TableSelector from "@/components/reservations/TableSelector";
+import { TableSelector } from "@/components/tables/TableSelector";
+import { TableSelectorWithModal } from "@/components/tables/TableSelectorWithModal";
 import DatePicker from "@/components/reservations/DatePicker";
 import TimeRangePicker from "@/components/reservations/TimeRangePicker";
 import useReservationData from "@/hooks/useReservationData";
@@ -54,15 +55,15 @@ const ReservationsPage = () => {
         identityUserId: userId,
         tableModelId: selectedTableId,
       });
-      setSuccessMessage(`Succes: ${message}`);
+      setSuccessMessage(`Success: ${message}`);
     } catch (err) {
       setFormError(err.message);
     }
   };
 
   return (
-    <div class="flex justify-center items-center w-full">
-      <div class="container max-w-xl px-4 py-8">
+    <div className="flex justify-center items-center w-full">
+      <div className="container max-w-xl px-4 py-8">
         <h1 className="text-2xl font-bold mb-4 text-center">
           Create a Booking
         </h1>
@@ -74,6 +75,10 @@ const ReservationsPage = () => {
             selectedTableId={selectedTableId}
             onTableChange={handleTableChange}
           />
+          <div className="flex justify-center">
+            {" "}
+            <TableSelectorWithModal onTableSelect={setSelectedTableId} />
+          </div>
           <DatePicker
             selectedDate={selectedDate}
             onDateChange={handleDateChange}

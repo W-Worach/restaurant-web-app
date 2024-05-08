@@ -11,4 +11,15 @@ const getTables = async () => {
   return response.json();
 };
 
-export { getTables };
+const getInfrastructure = async () => {
+  const response = await fetch(config.apiUrl + "/api/Table/get-infrastructure", {
+    method: "GET",
+  });
+
+  if (!response.ok) {
+    throw new Error("Infrastructure downloading problem. " + response.statusText);
+  }
+  return response.json();
+};
+
+export { getTables, getInfrastructure };

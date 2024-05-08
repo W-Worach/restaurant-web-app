@@ -27,7 +27,6 @@ export const AuthProvider = ({ children }) => {
           setToken(storedToken);
         }
       } catch (error) {
-        console.error("Error decoding the token:", error);
         logout(); 
       }
     }

@@ -24,7 +24,9 @@ const Cart = ({
 
   return (
     <div className="bg-white shadow-xl rounded-lg p-4 m-2">
-      <h2 className="text-xl font-bold mb-4">Cart</h2>
+      <label htmlFor="Cart" className="block text-lg font-medium text-gray-700 text-left">
+        Cart:
+      </label>
       {orderStatus && items.length === 0 && (
         <div className="p-3 mb-4 text-center text-green-800 bg-green-200 rounded">
           {orderStatus}

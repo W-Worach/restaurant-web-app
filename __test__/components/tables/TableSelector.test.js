@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import TableSelector from "@/components/tables/TableSelectorWithAvailability";
+import { TableSelectorWithAvailability, TableSelector } from "@/components/tables/TableSelector";
 
 const mockTables = [
   { id: 1, numberOfSeats: 4, isAvailable: true },
@@ -11,7 +11,7 @@ describe("TableSelector Component Tests", () => {
   it("renders correctly with provided tables and selected table ID", () => {
     const selectedTableId = 2;
     render(
-      <TableSelector
+      <TableSelectorWithAvailability
         tables={mockTables}
         selectedTableId={selectedTableId}
         onTableSelect={() => {}}
@@ -38,7 +38,7 @@ describe("TableSelector Component Tests", () => {
   it("triggers onTableSelect with the correct table ID when a different table is selected", () => {
     const onTableSelect = jest.fn();
     render(
-      <TableSelector
+      <TableSelectorWithAvailability
         tables={mockTables}
         selectedTableId={null}
         onTableSelect={onTableSelect}
@@ -50,5 +50,27 @@ describe("TableSelector Component Tests", () => {
 
     expect(onTableSelect).toHaveBeenCalledTimes(1);
     expect(onTableSelect).toHaveBeenCalledWith(2);
+  });
+
+  it("renders correctly with provided tables and selected table ID", () => {
+    const selectedTableId = 2;
+    render(
+      <TableSelector
+        tables={mockTables}
+        selectedTableId={selectedTableId}
+        onTableChange={() => {}}
+      />
+    );
+
+    const selectElement = screen.getByRole("combobox");
+    expect(selectElement).toBeInTheDocument();
+    expect(selectElement).toHaveValue(selectedTableId.toString());
+
+    mockTables.forEach((table) => {
+      const optionText = `Table ${table.id} - ${table.numberOfSeats} chairs`;
+      const optionElement = screen.getByText(optionText);
+      expect(optionElement).toBeInTheDocument();
+      expect(optionElement).toHaveValue(table.id.toString());
+    });
   });
 });

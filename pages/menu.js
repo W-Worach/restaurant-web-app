@@ -5,7 +5,8 @@ import DishList from "@/components/dishCard/DishList";
 import Cart from "@/components/cart/Cart";
 import useCartManager from "@/hooks/useCartManager";
 import { AuthContext } from "@/context/AuthContext";
-import TableSelector from "@/components/tables/TableSelectorWithAvailability";
+import { TableSelectorWithAvailability } from "@/components/tables/TableSelector";
+import { TableSelectorWithModalWithAvailability } from "@/components/tables/TableSelectorWithModal";
 
 const MenuPage = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -53,8 +54,12 @@ const MenuPage = () => {
         {isLoggedIn ? (
           <>
             <div className="m-2 mb-4 shadow-lg p-4 rounded-lg bg-white">
-              <h2 className="text-lg font-semibold mb-2">Choose Table</h2>
-              <TableSelector
+              <TableSelectorWithAvailability
+                tables={tables}
+                selectedTableId={selectedTableId}
+                onTableSelect={setSelectedTableId}
+              />
+              <TableSelectorWithModalWithAvailability
                 tables={tables}
                 selectedTableId={selectedTableId}
                 onTableSelect={setSelectedTableId}
@@ -66,7 +71,7 @@ const MenuPage = () => {
               updateQuantity={updateQuantity}
               submitOrder={() => {
                 if (!selectedTableId) {
-                  alert("Wybierz stolik przed zamówieniem!");
+                  alert("Please select a table before placing an order!");
                 } else {
                   submitOrder(selectedTableId, userId, token, setOrderStatus);
                 }
